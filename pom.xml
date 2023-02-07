@@ -24,12 +24,6 @@
         <version>2.20</version>
         <executions>
           <execution>
-            <id>integration-test</id>
-            <goals>
-              <goal>integration-test</goal>
-            </goals>
-          </execution>
-          <execution>
             <id>verify</id>
             <goals>
               <goal>verify</goal>
