@@ -38,7 +38,8 @@ jobs:
           cd target
           ls -al
           pwd
-
+          cp $GITHUB_WORKSPACE/target/myshuttledev.war /home/ubuntu/temp
+          
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.6
       with:
