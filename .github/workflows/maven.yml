@@ -37,6 +37,7 @@ jobs:
           ls -al
           cd target
           ls -al
+          pwd
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.6
