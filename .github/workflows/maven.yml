@@ -49,4 +49,4 @@ jobs:
         path: "/home/ubuntu/actions-runner/_work/Java-Application/Java-Application/target/myshuttledev.war"
 
     - name: Deploy the build artifact to the tomcat server
-      run: cp $GITHUB_WORKSPACE/target/myshuttledev.war /var/lib/tomcat9/webapps   
+      run: sudo cp $GITHUB_WORKSPACE/target/myshuttledev.war /var/lib/tomcat9/webapps   
