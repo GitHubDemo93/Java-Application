@@ -46,4 +46,4 @@ jobs:
         # Artifact name
         name: myshuttle
         # A file, directory or wildcard pattern that describes what to upload
-        path: /target/myshuttledev.war
+        path: "/home/ubuntu/actions-runner/_work/Java-Application/Java-Application/target"
