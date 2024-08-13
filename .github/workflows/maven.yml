@@ -41,6 +41,7 @@ jobs:
   # comment multiple lines at once - ctrl+ /
   # deploy:
   #     runs-on: tomcat-server
+  #     needs: build
   #     steps:
   #       - name: Download a Build Artifact
   #         uses: actions/download-artifact@v4.1.8
