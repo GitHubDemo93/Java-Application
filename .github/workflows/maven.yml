@@ -47,7 +47,7 @@ jobs:
             # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
             name: myshuttle
             # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-            path: $GITHUB_WORKSPACE/deployment_artifact
+            path: deployment_artifact
             
         - name: Deploy the build artifact to the Tomcat server
           run: sudo cp $GITHUB_WORKSPACE/deployment_artifact/myshuttledev.war /var/lib/tomcat9/webapps   
