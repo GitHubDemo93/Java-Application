@@ -39,17 +39,22 @@ jobs:
         path: "/home/ubuntu/actions-runner/_work/Java-Application/Java-Application/target/myshuttledev.war"
 
   # comment multiple lines at once - ctrl+ /
-  # deploy:
-  #     runs-on: tomcat-server
-  #     needs: build
-  #     steps:
-  #       - name: Download a Build Artifact
-  #         uses: actions/download-artifact@v4.1.8
-  #         with:
-  #           # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
-  #           name: myshuttle
-  #           # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-  #           path: deployment_artifact
+  dev:
+      runs-on: tomcat-server
+      needs: build
+      environment: Dev
+      steps:
+        - name: Return the value of a variable set in an environment
+          run: |
+            echo "${{env.DEPLOYMENT_PATH_NAME}}"
             
-  #       - name: Deploy the build artifact to the Tomcat server
-  #         run: sudo cp $GITHUB_WORKSPACE/deployment_artifact/myshuttledev.war /var/lib/tomcat9/webapps   
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v4.1.8
+          with:
+            # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+            name: myshuttle
+            # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
+            path: ${{env.DEPLOYMENT_PATH_NAME}}
+            
+        - name: Deploy the build artifact to the Tomcat server
+          run: sudo cp $GITHUB_WORKSPACE/${{env.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
