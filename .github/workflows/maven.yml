@@ -14,6 +14,9 @@ on: workflow_dispatch
   #pull_request:
   #  branches: [ "master" ]
 
+env:
+  DEPLOYMENT_PATH_NAME: deployment_artifact
+
 jobs:
   build:
 
@@ -53,7 +56,10 @@ jobs:
             #echo '${{env.DEPLOYMENT_PATH_NAME}}'
 
             # To reference the variables set at the environment level from settings, use vars context
-            echo '${{vars.DEPLOYMENT_PATH_NAME}}'  
+            #echo '${{vars.DEPLOYMENT_PATH_NAME}}'
+
+            # To reference the varaible set at workflow level, just use $variablename
+            echo '$DEPLOYMENT_PATH_NAME'
             
         - name: Download a Build Artifact
           uses: actions/download-artifact@v4.1.8
@@ -62,7 +68,8 @@ jobs:
             name: myshuttle
             # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
             #path: ${{env.DEPLOYMENT_PATH_NAME}}
-            path: ${{vars.DEPLOYMENT_PATH_NAME}}
+            #path: ${{vars.DEPLOYMENT_PATH_NAME}}
+            path: $DEPLOYMENT_PATH_NAME
             
         - name: Deploy the build artifact to the Tomcat server
-          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
+          run: sudo cp $GITHUB_WORKSPACE/$DEPLOYMENT_PATH_NAME/myshuttledev.war /var/lib/tomcat9/webapps   
