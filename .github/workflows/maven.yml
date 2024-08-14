@@ -52,6 +52,8 @@ jobs:
         
       steps:
         - name: Return the value of a variable set in an environment
+          env:
+            name: Java
           run: |
             #echo '${{env.DEPLOYMENT_PATH_NAME}}'
 
@@ -62,8 +64,6 @@ jobs:
             #echo '$DEPLOYMENT_PATH_NAME'
 
             # To reference the variable set at the step level, just use $variable name
-            env:
-              name: Java
             echo "This is a sample $name Application"
             
         - name: Download a Build Artifact
@@ -77,4 +77,4 @@ jobs:
             #path: $DEPLOYMENT_PATH_NAME
             
         - name: Deploy the build artifact to the Tomcat server
-          run: sudo cp $GITHUB_WORKSPACE/$DEPLOYMENT_PATH_NAME/myshuttledev.war /var/lib/tomcat9/webapps   
+          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
