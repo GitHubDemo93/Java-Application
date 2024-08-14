@@ -43,12 +43,15 @@ jobs:
       runs-on: tomcat-server
       needs: build
       environment: Dev
-      env:
-        DEPLOYMENT_PATH_NAME: deployment_artifact
+      # To set environment variables at the job level and reference them using ${{env.variablename}}
+      # env:
+      #   DEPLOYMENT_PATH_NAME: deployment_artifact
+        
       steps:
         - name: Return the value of a variable set in an environment
           run: |
-            echo '${{env.DEPLOYMENT_PATH_NAME}}'
+            #echo '${{env.DEPLOYMENT_PATH_NAME}}'
+            echo '${{vars.DEPLOYMENT_PATH_NAME}}'
             
         - name: Download a Build Artifact
           uses: actions/download-artifact@v4.1.8
@@ -56,7 +59,8 @@ jobs:
             # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
             name: myshuttle
             # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-            path: ${{env.DEPLOYMENT_PATH_NAME}}
+            #path: ${{env.DEPLOYMENT_PATH_NAME}}
+            path: ${{vars.DEPLOYMENT_PATH_NAME}}
             
         - name: Deploy the build artifact to the Tomcat server
-          run: sudo cp $GITHUB_WORKSPACE/${{env.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
+          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
