@@ -39,14 +39,14 @@ jobs:
         path: "/home/ubuntu/actions-runner/_work/Java-Application/Java-Application/target/myshuttledev.war"
 
   # comment multiple lines at once - ctrl+ /
-  dev:
+  Dev:
       runs-on: tomcat-server
       needs: build
       environment: Dev
       steps:
         - name: Return the value of a variable set in an environment
           run: |
-            echo "${{env.DEPLOYMENT_PATH_NAME}}"
+            echo ' ${{env.DEPLOYMENT_PATH_NAME}} '
             
         - name: Download a Build Artifact
           uses: actions/download-artifact@v4.1.8
