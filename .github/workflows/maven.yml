@@ -51,7 +51,9 @@ jobs:
         - name: Return the value of a variable set in an environment
           run: |
             #echo '${{env.DEPLOYMENT_PATH_NAME}}'
-            echo '${{vars.DEPLOYMENT_PATH_NAME}}'
+
+            # To reference the variables set at the environment level from settings, use vars context
+            echo '${{vars.DEPLOYMENT_PATH_NAME}}'  
             
         - name: Download a Build Artifact
           uses: actions/download-artifact@v4.1.8
