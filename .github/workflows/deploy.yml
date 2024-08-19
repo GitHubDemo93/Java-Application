@@ -36,7 +36,10 @@ jobs:
             # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
             #path: ${{env.DEPLOYMENT_PATH_NAME}}
             path: ${{vars.DEPLOYMENT_PATH_NAME}}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            run-id: 4
             #path: $DEPLOYMENT_PATH_NAME
+            
             
         - name: Deploy the build artifact to the Tomcat server
           run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps
