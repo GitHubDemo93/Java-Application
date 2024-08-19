@@ -44,7 +44,7 @@ jobs:
   # comment multiple lines at once - ctrl+ /
   Dev:
       runs-on: tomcat-server
-      needs: build
+      #needs: build
       environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
