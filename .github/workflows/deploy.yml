@@ -37,7 +37,7 @@ jobs:
             #path: ${{env.DEPLOYMENT_PATH_NAME}}
             path: ${{vars.DEPLOYMENT_PATH_NAME}}
             github-token: ${{ secrets.GITHUB_TOKEN }}
-            run-id: 4
+            run-id: 10449011665
             #path: $DEPLOYMENT_PATH_NAME
             
             
