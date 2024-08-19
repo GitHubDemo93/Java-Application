@@ -43,7 +43,7 @@ jobs:
   Dev:
       runs-on: deployment_server
       needs: build
-      environment: Dev
+      #environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
       #   DEPLOYMENT_PATH_NAME: deployment_artifact
@@ -71,8 +71,9 @@ jobs:
             name: myshuttle
             # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
             #path: ${{env.DEPLOYMENT_PATH_NAME}}
-            path: ${{vars.DEPLOYMENT_PATH_NAME}}
+            #path: ${{vars.DEPLOYMENT_PATH_NAME}}
             #path: $DEPLOYMENT_PATH_NAME
+            path: deployment_artifact
             
         - name: Deploy the build artifact to the Tomcat server
-          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps   
+          run: sudo cp $GITHUB_WORKSPACE/deployment_artifact/myshuttledev.war /var/lib/tomcat9/webapps   
