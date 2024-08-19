@@ -1,0 +1,11 @@
+name: Java CD on Dev Environment
+
+on:
+  workflow_dispatch
+
+jobs:
+  Dev:
+    runs-on: deployment_server
+    environment: Dev
+    steps:
+      - uses: ./.github/workflows/maven_basic.yml
