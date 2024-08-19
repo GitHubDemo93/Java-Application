@@ -1,0 +1,39 @@
+name: Java CD pipeline
+on:
+  workflow_call
+jobs:
+  Dev:      
+      runs-on: deployment_server
+      environment: Dev
+      # To set environment variables at the job level and reference them using ${{env.variablename}}
+      # env:
+      #   DEPLOYMENT_PATH_NAME: deployment_artifact
+        
+      steps:
+        - name: Return the value of a variable set in an environment
+          env:
+            name: Java
+          run: |
+            #echo '${{env.DEPLOYMENT_PATH_NAME}}'
+
+            # To reference the variables set at the environment level from settings, use vars context
+            #echo '${{vars.DEPLOYMENT_PATH_NAME}}'
+
+            # To reference the variable set at the workflow level, just use $variablename
+            #echo '$DEPLOYMENT_PATH_NAME'
+
+            # To reference the variable set at the step level, just use $variable name
+            echo "This is a sample $name Application"
+            
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v4.1.8
+          with:
+            # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+            name: myshuttle
+            # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
+            #path: ${{env.DEPLOYMENT_PATH_NAME}}
+            path: ${{vars.DEPLOYMENT_PATH_NAME}}
+            #path: $DEPLOYMENT_PATH_NAME
+            
+        - name: Deploy the build artifact to the Tomcat server
+          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps
