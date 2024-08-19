@@ -12,34 +12,30 @@ jobs:
       # env:
       #   DEPLOYMENT_PATH_NAME: deployment_artifact
         
-      steps:
-        - name: Return the value of a variable set in an environment
-          env:
-            name: Java
-          run: |
-            #echo '${{env.DEPLOYMENT_PATH_NAME}}'
-
-            # To reference the variables set at the environment level from settings, use vars context
-            #echo '${{vars.DEPLOYMENT_PATH_NAME}}'
-
-            # To reference the variable set at the workflow level, just use $variablename
-            #echo '$DEPLOYMENT_PATH_NAME'
-
-            # To reference the variable set at the step level, just use $variable name
-            echo "This is a sample $name Application"
-            
+      steps:            
         - name: Download a Build Artifact
           uses: actions/download-artifact@v4.1.8
           with:
-            # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
-            name: myshuttle
-            # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-            #path: ${{env.DEPLOYMENT_PATH_NAME}}
-            path: ${{vars.DEPLOYMENT_PATH_NAME}}
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            run-id: 10449011665
-            #path: $DEPLOYMENT_PATH_NAME
+            script: |
+              let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+              });
+              let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+                return artifact.name == "myshuttle"
+              })[0];
+              let download = await github.rest.actions.downloadArtifact({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+                 artifact_id: matchArtifact.id,
+                 archive_format: 'zip',
+              });
+              let fs = require('fs');
+              fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/myshuttle.zip`, Buffer.from(download.data));
+
+        - name: 'Unzip artifact'
+          run: unzip myshuttle.zip
             
-            
-        - name: Deploy the build artifact to the Tomcat server
-          run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps
+        # - name: Deploy the build artifact to the Tomcat server
+        #   run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps
