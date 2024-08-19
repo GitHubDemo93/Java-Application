@@ -1,6 +1,9 @@
 name: Java CD pipeline
 on:
-  workflow_call
+  workflow_run:
+    workflows: [Build]
+    types:
+      - completed
 jobs:
   Dev:      
       runs-on: deployment_server
