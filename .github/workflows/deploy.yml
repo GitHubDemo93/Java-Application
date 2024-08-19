@@ -1,4 +1,4 @@
-name: Java CD pipeline
+name: Deploy
 on:
   workflow_run:
     workflows: [Build]
