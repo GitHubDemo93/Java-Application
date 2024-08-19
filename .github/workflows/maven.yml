@@ -19,9 +19,7 @@ on: workflow_dispatch
 
 jobs:
   build:
-
     runs-on: tomcat-server
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 11
@@ -44,7 +42,7 @@ jobs:
   # comment multiple lines at once - ctrl+ /
   Dev:
       runs-on: deployment_server
-      #needs: build
+      needs: build
       environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
