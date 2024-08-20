@@ -1,1 +1,11 @@
+name: Java CD on QA Environment
 
+on:
+  workflow_dispatch
+
+jobs:
+  Dev:
+    runs-on: deployment_server
+    environment: QA
+    steps:
+      - uses: ./.github/workflows/maven_basic.yml
