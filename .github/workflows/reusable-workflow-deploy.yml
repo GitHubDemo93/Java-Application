@@ -9,6 +9,10 @@ on:
       runner_label:
         required: true
         type: string
+      environment:
+        required: true
+        type: string
+        default: Dev     
   
 jobs:
   Deploy:      
