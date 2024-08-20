@@ -12,7 +12,7 @@ on:
   
 jobs:
   Deploy:      
-      runs-on: self-hosted
+      runs-on: ${{inputs.runner_label}}
       #environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
