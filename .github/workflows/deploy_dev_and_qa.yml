@@ -24,6 +24,7 @@ jobs:
     #environment: QA
     name: Deployment to QA environment
     uses: ./.github/workflows/reusable-workflow-deploy.yml
+    needs: Dev
     with:
       environment: QA
       runner_label: qa-server
