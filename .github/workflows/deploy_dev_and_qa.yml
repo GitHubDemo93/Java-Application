@@ -16,7 +16,7 @@ jobs:
     name: Deployment to Dev environment
     uses: ./.github/workflows/reusable-workflow-deploy.yml
     with:
-        environment: Dev
+        env: Dev
         runner_label: dev-server
 
   QA:
@@ -26,6 +26,6 @@ jobs:
     uses: ./.github/workflows/reusable-workflow-deploy.yml
     needs: Dev
     with:
-      environment: QA
+      env: QA
       runner_label: qa-server
         
