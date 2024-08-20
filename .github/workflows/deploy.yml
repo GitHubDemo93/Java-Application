@@ -37,5 +37,7 @@ jobs:
         - name: 'Unzip artifact'
           run: unzip myshuttle.zip
             
-        # - name: Deploy the build artifact to the Tomcat server
-        #   run: sudo cp $GITHUB_WORKSPACE/${{vars.DEPLOYMENT_PATH_NAME}}/myshuttledev.war /var/lib/tomcat9/webapps
+        - name: Deploy the build artifact to the Tomcat server
+          run: |
+            echo $GITHUB_WORKSPACE
+            sudo cp $GITHUB_WORKSPACE/myshuttledev.war /var/lib/tomcat9/webapps
