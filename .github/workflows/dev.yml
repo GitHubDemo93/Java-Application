@@ -7,10 +7,10 @@ on:
 
 jobs:
   Dev:
-    runs-on: self-hosted
+    runs-on: dev-server
     environment: Dev
     steps:
       - uses: ./.github/workflows/reusable-workflow-deploy.yml
-        with:
-          runner_label: dev-server
+        # with:
+        #   runner_label: dev-server
         
