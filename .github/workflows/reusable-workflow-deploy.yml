@@ -9,7 +9,7 @@ on:
       runner_label:
         required: true
         type: string
-      environment:
+      env:
         required: true
         type: string
         default: Dev     
@@ -17,6 +17,7 @@ on:
 jobs:
   Deploy:      
       runs-on: ${{inputs.runner_label}}
+      environment: ${{inputs.env}}
       #environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
