@@ -1,13 +1,12 @@
 name: Deploy
 on:
-  # workflow_run:
-  #   workflows: [Build]
-  #   types:
-  #     - completed
-  workflow_call:
+  workflow_run:
+    workflows: [Build]
+    types:
+      - completed
   
 jobs:
-  Dev:      
+  Deploy:      
       runs-on: deployment_server
       environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
