@@ -1,19 +1,19 @@
 name: Deploy
 on:
-  workflow_run:
-    workflows: [Build]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: [Build]
+  #   types:
+  #     - completed
   workflow_call:
-    inputs:
-      runner_label:
-        required: true
-        type: string
+    # inputs:
+    #   runner_label:
+    #     required: true
+    #     type: string
   
 jobs:
   Deploy:      
-      runs-on: ${{inputs.runner_label}}
-      environment: Dev
+      runs-on: self-hosted
+      #environment: Dev
       # To set environment variables at the job level and reference them using ${{env.variablename}}
       # env:
       #   DEPLOYMENT_PATH_NAME: deployment_artifact
