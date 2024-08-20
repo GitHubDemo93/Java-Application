@@ -5,10 +5,10 @@ on:
   #   types:
   #     - completed
   workflow_call:
-    # inputs:
-    #   runner_label:
-    #     required: true
-    #     type: string
+    inputs:
+      runner_label:
+        required: true
+        type: string
   
 jobs:
   Deploy:      
