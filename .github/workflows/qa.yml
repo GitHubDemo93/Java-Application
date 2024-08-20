@@ -5,7 +5,9 @@ on:
 
 jobs:
   Dev:
-    runs-on: deployment_server
+    runs-on: qa-server
     environment: QA
     steps:
-      - uses: ./.github/workflows/maven_basic.yml
+      - uses: ./.github/workflows/reusable-workflow-deploy.yml
+        # with:
+        #   runner_label: qa-server
