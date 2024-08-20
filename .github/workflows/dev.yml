@@ -1,6 +1,8 @@
 name: Java CD on Dev Environment
 
 on:
+  # push:
+  #   branches: [master]
   workflow_dispatch
 
 jobs:
