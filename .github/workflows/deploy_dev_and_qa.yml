@@ -1,0 +1,30 @@
+name: Deploy to Dev and QA Environment
+
+on:
+  # push:
+  #   branches: [master]
+  workflow_run:
+    workflows: [Build]
+    types:
+      - completed
+
+jobs:
+
+  Dev:
+    #runs-on: dev-server
+    #environment: Dev
+    name: Deployment to Dev environment
+    uses: ./.github/workflows/reusable-workflow-deploy.yml
+    with:
+        environment: Dev
+        runner_label: dev-server
+
+  QA:
+    #runs-on: qa-server
+    #environment: QA
+    name: Deployment to QA environment
+    uses: ./.github/workflows/reusable-workflow-deploy.yml
+    with:
+      environment: QA
+      runner_label: qa-server
+        
