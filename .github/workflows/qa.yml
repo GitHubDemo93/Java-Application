@@ -1,7 +1,10 @@
-name: Java CD on QA Environment
+name: QA Environment
 
 on:
-  workflow_dispatch
+  workflow_run:
+    workflows: [Dev Environment]
+    types:
+      - completed
 
 jobs:
   Dev:
